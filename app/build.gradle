@@ -1,0 +1,99 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs'
+}
+
+android {
+    namespace 'ru.divarteam.franimal'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "ru.divarteam.franimal"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
+
+    signingConfigs {
+        garbage_key {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('debug.keystore')
+            storePassword 'android'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kapt {
+        correctErrorTypes = true
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    viewBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation "androidx.core:core-ktx:$coreKtxVersion"
+    implementation "androidx.core:core-splashscreen:$splashScreenVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion"
+    implementation "com.airbnb.android:epoxy:$epoxyVersion"
+    implementation "com.facebook.shimmer:shimmer:$shimmerVersion"
+    implementation "com.factor:bouncy:$bouncyVersion"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "com.google.android.play:app-update-ktx:$googleAppUpdateVersion"
+    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "com.jsibbold:zoomage:$zoomageVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okHttp3Version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttp3Version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofitVersion"
+    implementation "de.hdodenhof:circleimageview:$circleImageViewVersion"
+    implementation group: 'org.joda', name: 'joda-convert', version: '2.2.3', classifier: 'classic'
+    implementation group: 'com.google.android.gms', name: 'play-services-wearable', version: '18.1.0'
+    implementation "joda-time:joda-time:$jodaTimeVersion"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinReflectVersion"
+    implementation "org.jsoup:jsoup:$jsoupVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+    implementation "androidx.work:work-runtime-ktx:$workerVersion"
+    kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+    kapt "com.google.dagger:hilt-compiler:$hiltVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+}
