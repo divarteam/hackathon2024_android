@@ -82,9 +82,9 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-scalars:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
     implementation "de.hdodenhof:circleimageview:$circleImageViewVersion"
     implementation group: 'org.joda', name: 'joda-convert', version: '2.2.3', classifier: 'classic'
-    implementation group: 'com.google.android.gms', name: 'play-services-wearable', version: '18.1.0'
     implementation "joda-time:joda-time:$jodaTimeVersion"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinReflectVersion"
     implementation "org.jsoup:jsoup:$jsoupVersion"

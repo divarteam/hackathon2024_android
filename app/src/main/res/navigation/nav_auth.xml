@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_auth">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_auth"
+    app:startDestination="@id/authIntroductionFragment">
 
+    <fragment
+        android:id="@+id/authIntroductionFragment"
+        android:name="ru.divarteam.franimal.presentation.auth.AuthIntroductionFragment"
+        android:label="AuthIntroductionFragment"
+        tools:layout="@layout/fragment_auth_introduction">
+        <action
+            android:id="@+id/action_authIntroductionFragment_to_authInputEmailBottomSheet"
+            app:destination="@id/authInputEmailBottomSheet" />
+    </fragment>
+    <dialog
+        android:id="@+id/authInputEmailBottomSheet"
+        android:name="ru.divarteam.franimal.presentation.auth.AuthInputEmailBottomSheet"
+        android:label="AuthInputEmailBottomSheet"
+        tools:layout="@layout/bottom_sheet_input_email">
+        <action
+            android:id="@+id/action_authInputEmailBottomSheet_to_authInsertCodeFragment"
+            app:destination="@id/authInsertCodeFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/authInsertCodeFragment"
+        android:name="ru.divarteam.franimal.presentation.auth.AuthInsertCodeFragment"
+        android:label="AuthInsertCodeFragment"
+        tools:layout="@layout/fragment_auth_insert_code">
+        <argument
+            android:name="email"
+            app:argType="string" />
+    </fragment>
 </navigation>

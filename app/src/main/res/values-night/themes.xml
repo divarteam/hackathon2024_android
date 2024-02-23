@@ -2,7 +2,6 @@
 
     <style name="Theme.Franimal" parent="Theme.Material3.Dark.NoActionBar">
         <!--        <item name="colorPrimary">#171626</item>-->
-        <item name="colorPrimaryDark">#171626</item>
         <item name="colorAccent">#F5F6FA</item>
         <item name="strokeColor">#6f6f79</item>
         <item name="android:candidatesTextStyleSpans">candidates</item>
@@ -51,6 +50,6 @@
         <item name="background">@android:color/transparent</item>
         <!--        <item name="android:colorBackground">@android:color/transparent</item>-->
         <item name="android:textCursorDrawable">@null</item>
-        <item name="popupMenuStyle">@style/Theme.UUST.PopupMenu</item>
+<!--        <item name="popupMenuStyle">@style/Theme.UUST.PopupMenu</item>-->
     </style>
 </resources>
