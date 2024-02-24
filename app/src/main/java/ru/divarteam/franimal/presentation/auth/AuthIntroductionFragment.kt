@@ -44,19 +44,15 @@ class AuthIntroductionFragment : Fragment() {
         }
 
         binding.loginViaVk.setOnClickListener {
-            Toast.makeText(
-                context,
-                "Скоро добавим...",
-                Toast.LENGTH_SHORT
-            ).show()
+            findNavController().navigate(
+                AuthIntroductionFragmentDirections.actionAuthIntroductionFragmentToAuthVkLoginBottomSheet()
+            )
         }
 
         binding.loginViaTelegram.setOnClickListener {
-            Toast.makeText(
-                context,
-                "Скоро добавим...",
-                Toast.LENGTH_SHORT
-            ).show()
+            findNavController().navigate(
+                AuthIntroductionFragmentDirections.actionAuthIntroductionFragmentToAuthTgLoginBottomSheet()
+            )
         }
     }
 }

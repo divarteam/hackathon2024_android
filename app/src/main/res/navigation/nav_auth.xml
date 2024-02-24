@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_authIntroductionFragment_to_authInputEmailBottomSheet"
             app:destination="@id/authInputEmailBottomSheet" />
+        <action
+            android:id="@+id/action_authIntroductionFragment_to_authTgLoginBottomSheet"
+            app:destination="@id/authTgLoginBottomSheet" />
+        <action
+            android:id="@+id/action_authIntroductionFragment_to_authVkLoginBottomSheet"
+            app:destination="@id/authVkLoginBottomSheet" />
     </fragment>
     <dialog
         android:id="@+id/authInputEmailBottomSheet"
@@ -32,4 +38,14 @@
             android:name="email"
             app:argType="string" />
     </fragment>
+    <dialog
+        android:id="@+id/authVkLoginBottomSheet"
+        android:name="ru.divarteam.franimal.presentation.auth.AuthVkLoginBottomSheet"
+        android:label="AuthVkLoginBottomSheet"
+        tools:layout="@layout/bottom_sheet_vk_login"/>
+    <dialog
+        android:id="@+id/authTgLoginBottomSheet"
+        android:name="ru.divarteam.franimal.presentation.auth.AuthTgLoginBottomSheet"
+        android:label="AuthTgLoginBottomSheet"
+        tools:layout="@layout/bottom_sheet_tg_login"/>
 </navigation>

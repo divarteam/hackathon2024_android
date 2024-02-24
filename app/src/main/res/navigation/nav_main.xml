@@ -9,5 +9,97 @@
         android:id="@+id/profileFragment"
         android:name="ru.divarteam.franimal.presentation.profile.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile" >
+        <argument
+            android:name="user_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <action
+            android:id="@+id/action_profileFragment_to_profileEditFragment"
+            app:destination="@id/profileEditFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_profileNoteCreateBottomSheet"
+            app:destination="@id/profileNoteCreateBottomSheet" />
+        <action
+            android:id="@+id/action_profileFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="ru.divarteam.franimal.presentation.profile.ProfileEditFragment"
+        android:label="ProfileEditFragment"
+        tools:layout="@layout/fragment_profile_edit"/>
+    <fragment
+        android:id="@+id/shopFragment"
+        tools:layout="@layout/fragment_shop"
+        android:name="ru.divarteam.franimal.presentation.shop.ShopFragment"
+        android:label="ShopFragment" />
+    <fragment
+        android:id="@+id/notesFragment"
+        android:name="ru.divarteam.franimal.presentation.notes.NotesFragment"
+        android:label="NotesFragment"
+        tools:layout="@layout/fragment_notes">
+        <action
+            android:id="@+id/action_notesFragment_to_noteCreateBottomSheet"
+            app:destination="@id/noteCreateBottomSheet" />
+        <action
+            android:id="@+id/action_notesFragment_to_profileOtherFragment"
+            app:destination="@id/profileOtherFragment" />
+        <action
+            android:id="@+id/action_notesFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/noteCreateBottomSheet"
+        tools:layout="@layout/bottom_sheet_create_post"
+        android:name="ru.divarteam.franimal.presentation.notes.NoteCreateBottomSheet"
+        android:label="NoteCreateBottomSheet" />
+    <fragment
+        android:id="@+id/profileOtherFragment"
+        android:name="ru.divarteam.franimal.presentation.profile.ProfileOtherFragment"
+        android:label="ProfileOtherFragment"
+        tools:layout="@layout/fragment_profile">
+        <argument
+            android:name="user_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <action
+            android:id="@+id/action_profileOtherFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_animal_search"
+        android:id="@+id/animalSearchFragment"
+        android:name="ru.divarteam.franimal.presentation.animal.AnimalSearchFragment"
+        android:label="AnimalSearchFragment" >
+        <action
+            android:id="@+id/action_animalSearchFragment_to_profileOtherFragment"
+            app:destination="@id/profileOtherFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardSearchFragment"
+        tools:layout="@layout/fragment_card_search"
+        android:name="ru.divarteam.franimal.presentation.card.CardSearchFragment"
+        android:label="CardSearchFragment" >
+        <action
+            android:id="@+id/action_cardSearchFragment_to_profileOtherFragment"
+            app:destination="@id/profileOtherFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/profileNoteCreateBottomSheet"
+        tools:layout="@layout/bottom_sheet_create_post"
+        android:name="ru.divarteam.franimal.presentation.profile.ProfileNoteCreateBottomSheet"
+        android:label="ProfileNoteCreateBottomSheet" />
+    <fragment
+        android:id="@+id/noteFragment"
+        tools:layout="@layout/fragment_note"
+        android:name="ru.divarteam.franimal.presentation.notes.NoteFragment"
+        android:label="NoteFragment" >
+        <argument
+            android:name="note_int_id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_noteFragment_to_profileOtherFragment"
+            app:destination="@id/profileOtherFragment" />
+    </fragment>
 </navigation>

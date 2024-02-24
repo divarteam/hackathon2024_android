@@ -1,6 +1,409 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ru.divarteam.franimal.presentation.widget.FollowyAppBar
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:startIcon="@drawable/ic_person"
+        app:titleText="Профиль"
+        tools:visibility="gone" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/info_card"
+                style="@style/Widget.Material3.CardView.Filled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="55dp"
+                app:cardBackgroundColor="?colorSurfaceContainerHigh"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="45dp"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/user_is_busy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:text="Пользователь занят"
+                        android:textColor="?colorPrimary"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/fullname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:gravity="center"
+                        android:text="Денис Шайхльбарин"
+                        android:textSize="18sp"
+                        app:layout_constraintTop_toBottomOf="@id/user_is_busy" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/rank_card"
+                        style="@style/Widget.Material3.CardView.Filled"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="10dp"
+                        app:cardBackgroundColor="?colorSurfaceBright"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintTop_toBottomOf="@id/fullname">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingVertical="10dp">
+
+                            <TextView
+                                android:id="@+id/rank_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="10dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:gravity="center"
+                                android:text="Ранг: Герой"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/rank_remain"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:gravity="center"
+                                android:text="Осталось очков: 39"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toTopOf="@id/rank_progress"
+                                app:layout_constraintEnd_toEndOf="parent" />
+
+                            <ProgressBar
+                                android:id="@+id/rank_progress"
+                                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="6dp"
+                                android:layout_marginHorizontal="10dp"
+                                android:layout_marginTop="5dp"
+                                android:progress="20"
+                                android:progressDrawable="@drawable/curved_progress_bar"
+                                app:indicatorColor="?colorTertiary"
+                                app:layout_constraintTop_toBottomOf="@id/rank_text"
+                                app:trackColor="?colorTertiaryContainer" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/edit_profile"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/inter_semibold"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="Изменить профиль"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/rank_card" />
+
+                    <TextView
+                        android:id="@+id/coins"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="10dp"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:gravity="center"
+                        android:text="Монет: 40"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_monetization_smaller"
+                        app:drawableTint="?colorTertiary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/edit_profile" />
+
+                    <TextView
+                        android:id="@+id/age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:gravity="center"
+                        android:text="Возраст: 20 лет"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_age"
+                        app:drawableTint="?colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/coins" />
+
+                    <TextView
+                        android:id="@+id/city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:gravity="center"
+                        android:text="Город: Уфа"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_city"
+                        app:drawableTint="?colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/age" />
+
+                    <TextView
+                        android:id="@+id/mail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:gravity="center"
+                        android:text="Почта: dbarov3@gmail.com"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_mail_smaller"
+                        app:drawableTint="?colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/city" />
+
+                    <TextView
+                        android:id="@+id/phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:gravity="center"
+                        android:text="Телефон: +7 (937) 780-83-07"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_phone"
+                        app:drawableTint="?colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mail" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/avatar"
+                android:layout_width="90dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/roundedImageView"
+                app:srcCompat="@drawable/ic_launcher_background"
+                app:strokeColor="?colorSurfaceContainerHigh"
+                app:strokeWidth="5dp" />
+
+            <TextView
+                android:id="@+id/my_pets_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="Мои питомцы"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/info_card" />
+
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/my_pets_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                app:layout_constraintTop_toBottomOf="@id/my_pets_title"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_profile_animal" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_my_pet"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/inter_semibold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Добавить питомца"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/my_pets_recycler" />
+
+            <TextView
+                android:id="@+id/my_cards_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="Мои запросы"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/add_my_pet" />
+
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/my_cards_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                app:layout_constraintTop_toBottomOf="@id/my_cards_title"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_profile_card" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_my_card"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/inter_semibold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Опубликовать запрос"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/my_cards_recycler" />
+
+            <TextView
+                android:id="@+id/my_notes_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="Мои публикации"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/add_my_card" />
+
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/my_notes_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                app:layout_constraintTop_toBottomOf="@id/my_notes_title"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_profile_note" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_my_note"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/inter_semibold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Опубликовать запись"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/my_notes_recycler" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/exit"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_semibold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Выйти из аккаунта"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/add_my_note" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:colorBackground"
+        android:visibility="gone"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/loading_progress"
+            style="@style/Widget.Material3.CircularProgressIndicator.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:layout_constraintBottom_toTopOf="@id/loading_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:trackThickness="5dp" />
+
+        <TextView
+            android:id="@+id/loading_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="5dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="Идёт загрузка..."
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/loading_description"
+            app:layout_constraintTop_toBottomOf="@id/loading_progress" />
+
+        <TextView
+            android:id="@+id/loading_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:fontFamily="@font/inter_medium"
+            android:gravity="center"
+            android:text="Пожалуйста, подождите."
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loading_title" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

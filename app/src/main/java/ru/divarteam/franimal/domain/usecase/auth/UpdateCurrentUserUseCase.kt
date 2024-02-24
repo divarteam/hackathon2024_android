@@ -11,6 +11,6 @@ class UpdateCurrentUserUseCase @Inject constructor(
         newUserToken: String
     ) {
         preferenceRepository.currentUserId = newUserId
-        preferenceRepository.currentUserToken = newUserToken
+        preferenceRepository.currentUserToken = "Bearer $newUserToken"
     }
 }

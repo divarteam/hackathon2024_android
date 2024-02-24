@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/animalSearchFragment"
+        android:icon="@drawable/ic_pet"
+        android:title="Питомцы" />
+
+    <item
+        android:id="@+id/cardSearchFragment"
+        android:icon="@drawable/ic_volunteer"
+        android:title="Запросы" />
+
+    <item
+        android:id="@+id/notesFragment"
+        android:icon="@drawable/ic_news"
+        android:title="Сообщество" />
+
+    <item
+        android:id="@+id/shopFragment"
+        android:icon="@drawable/ic_shop"
+        android:title="Магазин" />
+
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_person"
+        android:title="Профиль" />
 </menu>

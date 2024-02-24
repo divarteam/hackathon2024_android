@@ -11,6 +11,8 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import ru.divarteam.franimal.data.network.response.UserResponse
+import ru.divarteam.franimal.domain.usecase.auth.AuthViaTgUseCase
+import ru.divarteam.franimal.domain.usecase.auth.AuthViaVkUseCase
 import ru.divarteam.franimal.domain.usecase.auth.CheckCodeUseCase
 import ru.divarteam.franimal.domain.usecase.auth.CheckMailExistsUseCase
 import ru.divarteam.franimal.domain.usecase.auth.SendCodeUseCase
@@ -22,7 +24,9 @@ class AuthViewModel @Inject constructor(
     private val sendCodeUseCase: SendCodeUseCase,
     private val checkCodeUseCase: CheckCodeUseCase,
     private val checkMailExistsUseCase: CheckMailExistsUseCase,
-    private val updateCurrentUserUseCase: UpdateCurrentUserUseCase
+    private val updateCurrentUserUseCase: UpdateCurrentUserUseCase,
+    private val authViaVkUseCase: AuthViaVkUseCase,
+    private val authViaTgUseCase: AuthViaTgUseCase
 ) : ViewModel() {
 
     val compositeDisposable = CompositeDisposable()
@@ -50,6 +54,44 @@ class AuthViewModel @Inject constructor(
         newUserToken: String
     ) {
         updateCurrentUserUseCase(newUserId, newUserToken)
+    }
+
+    fun authViaTg(
+        code: String,
+        doOnError: (String) -> Unit,
+        doOnSuccess: (UserResponse?) -> Unit
+    ) {
+        authViaTgUseCase(code)
+            .subscribeBy(onError = {
+                _loading.postValue(false)
+                doOnError(it.localizedMessage.orEmpty())
+            }, onSuccess = {
+                if (it.isSuccessful) {
+                    updateUserData(it.body()?.intId ?: -1, it.body()?.currentToken ?: "")
+                    doOnSuccess(it.body())
+                } else
+                    doOnError(it.errorBody().toString())
+            })
+            .addTo(compositeDisposable)
+    }
+
+    fun authViaVk(
+        code: String,
+        doOnError: (String) -> Unit,
+        doOnSuccess: (UserResponse?) -> Unit
+    ) {
+        authViaVkUseCase(code)
+            .subscribeBy(onError = {
+                _loading.postValue(false)
+                doOnError(it.localizedMessage.orEmpty())
+            }, onSuccess = {
+                if (it.isSuccessful) {
+                    updateUserData(it.body()?.intId ?: -1, it.body()?.currentToken ?: "")
+                    doOnSuccess(it.body())
+                } else
+                    doOnError(it.errorBody().toString())
+            })
+            .addTo(compositeDisposable)
     }
 
     fun checkCode(
@@ -81,7 +123,10 @@ class AuthViewModel @Inject constructor(
                         doOnError(it.localizedMessage.orEmpty())
                     }, onSuccess = {
                         _loading.postValue(false)
-                        doOnSuccess(it.body())
+                        if (it.isSuccessful)
+                            doOnSuccess(it.body())
+                        else
+                            doOnError(it.errorBody().toString())
                     })
                     .addTo(compositeDisposable)
             })
@@ -116,7 +161,10 @@ class AuthViewModel @Inject constructor(
                         timer.cancel()
                         doOnError(it.localizedMessage.orEmpty())
                     }, onSuccess = {
-                        doOnSuccess()
+                        if (it.isSuccessful)
+                            doOnSuccess()
+                        else
+                            doOnError(it.errorBody().toString())
                     })
                     .addTo(compositeDisposable)
             })

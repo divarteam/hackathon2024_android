@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 class PreferenceRepositoryImpl(val sharedPreferences: SharedPreferences) : PreferenceRepository {
 
     override var currentUserId: Int
-        get() = sharedPreferences.getInt(PreferenceRepository.PREFERENCE_CURRENT_USER_ID, 0)
+        get() = sharedPreferences.getInt(PreferenceRepository.PREFERENCE_CURRENT_USER_ID, -1)
         set(value) {
             sharedPreferences.edit()
                 .putInt(PreferenceRepository.PREFERENCE_CURRENT_USER_ID, value)
