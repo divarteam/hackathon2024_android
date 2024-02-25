@@ -151,4 +151,10 @@ interface FraminalAPIService {
         @Header("Authorization") token: String,
         @Query("note_int_id") noteIntId: Int
     ): Single<Response<IsOkResponse>>
+
+    @GET("say_hello")
+    fun sayHello(
+        @Header("Authorization") token: String,
+        @Query("target_user_int_id") targetUserIntId: Int
+    ): Single<Response<IsOkResponse>>
 }

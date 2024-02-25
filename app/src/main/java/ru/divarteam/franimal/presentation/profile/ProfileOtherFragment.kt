@@ -32,14 +32,6 @@ class ProfileOtherFragment : Fragment() {
     private val profileViewModel: ProfileViewModel by viewModels()
     private val args: ProfileFragmentArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
-        enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
-        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
-        returnTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,10 +68,30 @@ class ProfileOtherFragment : Fragment() {
 
         profileViewModel.userResponse.observe(viewLifecycleOwner) {
             binding.loading.visibility =
-                if (it.intId == null)
+                if (it == null)
                     View.VISIBLE
                 else
+                    if (it.intId == null)
+                        View.VISIBLE
+                    else
+                        View.GONE
+
+            if (it == null)
+                return@observe
+
+            binding.sayThankYou.visibility =
+                if (profileViewModel.checkIsCurrentUser(it.intId ?: -1))
                     View.GONE
+                else
+                    View.VISIBLE
+
+            binding.sayThankYou.setOnClickListener { _ ->
+                profileViewModel.sayHello(it.intId ?: -1, doOnError = {
+                    onError(it)
+                }, doOnBanned = {
+                    onBanned()
+                })
+            }
 
             binding.fullname.text = it.fullname ?: "Нет ФИО"
             binding.coins.setText((it.points ?: 0).toString().prependIndent("Очков: "))

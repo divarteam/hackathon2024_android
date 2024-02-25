@@ -20,14 +20,6 @@ class CardSearchFragment : Fragment() {
     private lateinit var binding: FragmentCardSearchBinding
     private val cardSearchViewModel: CardSearchViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
-        enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
-        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
-        returnTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

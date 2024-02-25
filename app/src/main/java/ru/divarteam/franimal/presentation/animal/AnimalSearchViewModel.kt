@@ -37,7 +37,7 @@ class AnimalSearchViewModel @Inject constructor(
             querySubject
                 .debounce(300, TimeUnit.MILLISECONDS)
                 .subscribe {
-                    loadUsers(it.filterNot { it in ". ,-/!?" }, doOnError)
+                    loadUsers(it, doOnError)
                 }
                 .addTo(compositeDisposable)
     }

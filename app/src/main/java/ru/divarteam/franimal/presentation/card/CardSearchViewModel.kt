@@ -39,7 +39,7 @@ class CardSearchViewModel @Inject constructor(
                 .distinctUntilChanged()
                 .debounce(300, TimeUnit.MILLISECONDS)
                 .subscribe {
-                    loadUsers(it.filterNot { it in ". ,-/!?" }, doOnError)
+                    loadUsers(it, doOnError)
                 }
                 .addTo(compositeDisposable)
     }

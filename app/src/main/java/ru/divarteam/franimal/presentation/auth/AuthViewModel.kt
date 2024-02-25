@@ -62,6 +62,8 @@ class AuthViewModel @Inject constructor(
         doOnSuccess: (UserResponse?) -> Unit
     ) {
         authViaTgUseCase(code)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onError = {
                 _loading.postValue(false)
                 doOnError(it.localizedMessage.orEmpty())
@@ -81,6 +83,8 @@ class AuthViewModel @Inject constructor(
         doOnSuccess: (UserResponse?) -> Unit
     ) {
         authViaVkUseCase(code)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onError = {
                 _loading.postValue(false)
                 doOnError(it.localizedMessage.orEmpty())

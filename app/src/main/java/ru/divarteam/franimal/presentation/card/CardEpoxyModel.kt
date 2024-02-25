@@ -40,10 +40,10 @@ abstract class CardEpoxyModel : EpoxyModelWithHolder<CardEpoxyModel.Holder>() {
         holder.expirationDate.setText(cardResponse.expirationDate?.prependIndent("До: "))
         holder.address.setText(cardResponse.address?.prependIndent("Адрес: "))
         holder.reason.setText(cardResponse.reason)
-        if (cardResponse.userIntId != null)
-            holder.root.setOnClickListener {
-                navigateToOwner(cardResponse.userIntId!!)
-            }
+        if (cardResponse.userIntId != null) {
+            holder.root.setOnClickListener { navigateToOwner(cardResponse.userIntId ?: -1) }
+            holder.fullname.setOnClickListener { navigateToOwner(cardResponse.userIntId ?: -1) }
+        }
         Glide.with(holder.avatar)
             .load("https://api.hackathon2024.divarteam.ru/file_storage/${cardResponse.user?.photoFilename}")
             .placeholder(

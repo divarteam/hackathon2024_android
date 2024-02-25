@@ -17,6 +17,7 @@ import ru.divarteam.franimal.domain.usecase.note.LikeNoteUseCase
 import ru.divarteam.franimal.domain.usecase.profile.CheckIsCurrentUserUseCase
 import ru.divarteam.franimal.domain.usecase.profile.ExitUseCase
 import ru.divarteam.franimal.domain.usecase.profile.LoadUserUseCase
+import ru.divarteam.franimal.domain.usecase.profile.SayHelloUseCase
 import ru.divarteam.franimal.domain.usecase.profile.UpdateUserPhotoUseCase
 import ru.divarteam.franimal.domain.usecase.profile.UpdateUserUseCase
 import java.net.URI
@@ -30,7 +31,8 @@ class ProfileViewModel @Inject constructor(
     private val likeNoteUseCase: LikeNoteUseCase,
     private val createNoteUseCase: CreateNoteUseCase,
     private val checkIsCurrentUserUseCase: CheckIsCurrentUserUseCase,
-    private val exitUseCase: ExitUseCase
+    private val exitUseCase: ExitUseCase,
+    private val sayHelloUseCase: SayHelloUseCase
 ) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
@@ -63,6 +65,30 @@ class ProfileViewModel @Inject constructor(
     )
     val userResponse: LiveData<UserResponse>
         get() = _userResponse
+
+    fun sayHello(
+        targetUserId: Int,
+        doOnError: (String) -> Unit,
+        doOnBanned: () -> Unit
+    ) {
+        sayHelloUseCase(targetUserId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(onError = {
+                doOnError(it.localizedMessage.orEmpty())
+                _loading.postValue(false)
+            }, onSuccess = {
+                if (it.isSuccessful)
+                    loadUserById(targetUserId, doOnError, doOnBanned)
+                else {
+                    doOnError(it.errorBody().toString())
+                    _loading.postValue(false)
+                }
+            }).addTo(compositeDisposable)
+    }
+
+    fun checkIsCurrentUser(userId: Int) =
+        checkIsCurrentUserUseCase(userId)
 
     fun likeNoteById(
         currentUserId: Int,
@@ -126,7 +152,7 @@ class ProfileViewModel @Inject constructor(
             .subscribeBy(onError = {
                 doOnError(it.localizedMessage.orEmpty())
             }, onSuccess = {
-                if (it.code() == 403)
+                if (it.code() == 403 || it.code() == 401)
                     doOnBanned()
                 if (it.isSuccessful)
                     _userResponse.postValue(it.body())

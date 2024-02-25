@@ -78,7 +78,23 @@ class NoteFragment : Fragment() {
             binding.avatar.setOnClickListener { _ ->
                 findNavController().navigate(
                     NoteFragmentDirections.actionNoteFragmentToProfileOtherFragment().apply {
-                        userId = it.intId ?: -1
+                        userId = it.user?.intId ?: -1
+                    }
+                )
+            }
+
+            binding.fullname.setOnClickListener { _ ->
+                findNavController().navigate(
+                    NoteFragmentDirections.actionNoteFragmentToProfileOtherFragment().apply {
+                        userId = it.user?.intId ?: -1
+                    }
+                )
+            }
+
+            binding.datetime.setOnClickListener { _ ->
+                findNavController().navigate(
+                    NoteFragmentDirections.actionNoteFragmentToProfileOtherFragment().apply {
+                        userId = it.user?.intId ?: -1
                     }
                 )
             }
@@ -140,6 +156,13 @@ class NoteFragment : Fragment() {
                     comment {
                         id(index)
                         commentResponse(commentResponse)
+                        navigateToOwner {
+                            findNavController().navigate(
+                                NoteFragmentDirections.actionNoteFragmentToProfileOtherFragment().apply {
+                                    userId = it.userIntId ?: -1
+                                }
+                            )
+                        }
                         removeComment {
                             noteViewModel.removeComment(
                                 commentResponse.noteIntId ?: -1,

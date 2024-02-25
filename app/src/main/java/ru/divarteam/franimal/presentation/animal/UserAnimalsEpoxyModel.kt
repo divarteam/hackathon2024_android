@@ -50,9 +50,8 @@ abstract class UserAnimalsEpoxyModel: EpoxyModelWithHolder<UserAnimalsEpoxyModel
             )
             .into(holder.avatar)
 
-        holder.avatar.setOnClickListener {
-            navigateToOwner(userResponse)
-        }
+        holder.avatar.setOnClickListener { navigateToOwner(userResponse) }
+        holder.fullname.setOnClickListener { navigateToOwner(userResponse) }
 
         holder.fullname.setText(userResponse.fullname)
         holder.petsRecycler.withModels {

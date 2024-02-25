@@ -30,14 +30,6 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private val profileViewModel: ProfileViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
-        enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
-        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
-        returnTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,6 +49,8 @@ class ProfileFragment : Fragment() {
 
         binding.myNotesRecycler.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        binding.sayThankYou.visibility = View.GONE
 
         profileViewModel.userResponse.observe(viewLifecycleOwner) {
             binding.loading.visibility =

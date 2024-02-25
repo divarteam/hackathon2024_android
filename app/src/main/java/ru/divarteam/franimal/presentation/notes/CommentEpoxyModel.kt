@@ -12,6 +12,7 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.imageview.ShapeableImageView
 import ru.divarteam.franimal.R
 import ru.divarteam.franimal.data.network.response.CommentResponse
+import ru.divarteam.franimal.data.network.response.UserResponse
 import ru.divarteam.franimal.util.KotlinHolder
 import ru.divarteam.franimal.util.attrColor
 import ru.divarteam.franimal.util.date
@@ -26,6 +27,9 @@ abstract class CommentEpoxyModel : EpoxyModelWithHolder<CommentEpoxyModel.Holder
     @EpoxyAttribute
     lateinit var removeComment: (CommentResponse) -> Unit
 
+    @EpoxyAttribute
+    lateinit var navigateToOwner: (CommentResponse) -> Unit
+
     override fun getDefaultLayout() = R.layout.item_comment
 
     @SuppressLint("SetTextI18n")
@@ -34,6 +38,10 @@ abstract class CommentEpoxyModel : EpoxyModelWithHolder<CommentEpoxyModel.Holder
         holder.text.isSelected = true
         holder.fullname.setText(commentResponse.user?.fullname)
         holder.dateTime.setText(commentResponse.creationDate?.date?.russianString)
+
+        holder.avatar.setOnClickListener { navigateToOwner(commentResponse) }
+        holder.fullname.setOnClickListener { navigateToOwner(commentResponse) }
+        holder.dateTime.setOnClickListener { navigateToOwner(commentResponse) }
 
         Glide.with(holder.avatar)
             .load("https://api.hackathon2024.divarteam.ru/file_storage/${commentResponse.user?.photoFilename}")

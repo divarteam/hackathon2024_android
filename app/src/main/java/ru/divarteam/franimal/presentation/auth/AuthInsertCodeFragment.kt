@@ -34,7 +34,6 @@ class AuthInsertCodeFragment : Fragment() {
         reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
     }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
