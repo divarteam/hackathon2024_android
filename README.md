@@ -2,7 +2,7 @@
 
 ## *Немалая помощь маленьким друзьям !*
 
-[![logo](https://i.imgur.com/HgU3Fuo.png)](https://i.imgur.com/HgU3Fuo.png)
+[![logo](https://i.imgur.com/M4DIeMv.png)](https://i.imgur.com/M4DIeMv.png)
 
 <hr>
 
