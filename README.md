@@ -68,8 +68,7 @@
 - Наслаждаться работающим приложением
 
 
-   [download_apk]: <https://api.hackathon2024.divarteam.ru/static/Franimal.apk
->
+   [download_apk]: <https://api.hackathon2024.divarteam.ru/static/Franimal.apk>
    
 ## License
 ```
