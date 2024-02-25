@@ -54,6 +54,7 @@
 - /hackathon2024_back/app/src/main/java/ru/divarteam/franimal/di - dependency injection
 
 <hr>
+
 ## Установка приложения
 - Скачать на Android-смартфон на базе системной версии ```8.0``` или новее APK-файл по данной ссылке - [тык][download_apk]
 - Установить приложение
@@ -72,7 +73,7 @@
    
 ## License
 ```
-Copyright 2024 Shaikhlbarin Denis
+Copyright 2024 Denis Shaykhlbarin
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
